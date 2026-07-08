@@ -41,8 +41,8 @@ jobs:
 
 
       - name: Run tests
-        run: |
-          pytest
+        run: pytest --html=reports/test-report.html
+     
 
 
       - name: Upload test report
