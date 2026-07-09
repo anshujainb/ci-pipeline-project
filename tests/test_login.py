@@ -10,7 +10,7 @@ class TestLogin:
         login_page = LoginPage(page)
 
         login_page.navigate()
-        login_page.login("standard_user", "secret_sauce")
+        login_page.login("standard_user", "secret_sauc")
 
         assert "inventory" in page.url
     

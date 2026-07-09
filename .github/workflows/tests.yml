@@ -51,3 +51,10 @@ jobs:
         with:
           name: pytest-report
           path: reports/
+      
+      - name: Upload Playwright artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: artifacts/

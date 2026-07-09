@@ -11,6 +11,9 @@ venv/
 # Test reports
 reports/
 
+# Playwright artifacts
+artifacts/
+
 # IDE files
 .vscode/
 .idea/
