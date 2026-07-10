@@ -2,6 +2,7 @@ import pytest
 
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+from config.settings import USERNAME, PASSWORD
 
 
 @pytest.mark.ui
@@ -15,8 +16,8 @@ class TestInventory:
 
         login_page.navigate()
         login_page.login(
-            "standard_user",
-            "secret_sauce"
+            USERNAME,
+            PASSWORD
         )
 
         # Verify inventory page
@@ -31,8 +32,8 @@ class TestInventory:
 
         login_page.navigate()
         login_page.login(
-            "standard_user",
-            "secret_sauce"
+            USERNAME,
+            PASSWORD
         )
 
         # Verify products

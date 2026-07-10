@@ -1,5 +1,6 @@
 import pytest
 from pages.login_page import LoginPage
+from config.settings import USERNAME, PASSWORD
 
 
 @pytest.mark.ui
@@ -11,7 +12,7 @@ class TestLogin:
         login_page = LoginPage(page)
 
         login_page.navigate()
-        login_page.login("standard_user", "secret_sauce")
+        login_page.login(USERNAME, PASSWORD)
 
         assert "inventory" in page.url
     
@@ -20,7 +21,7 @@ class TestLogin:
         login_page = LoginPage(page)
 
         login_page.navigate()
-        login_page.login("standard_user", "wrong_password")
+        login_page.login(USERNAME, "wrong_password")
 
         assert login_page.is_error_displayed()
         assert login_page.get_error_message() == \
