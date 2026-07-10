@@ -36,7 +36,7 @@ jobs:
         - name: Run UNIT Tests
           run: |
             mkdir -p reports/html
-            pytest -m unit --html=reports/html/unit-report.html --self-contained-html
+            pytest -m unit --html=reports/unit/unit-report.html --self-contained-html
         
         - name: Upload UNIT Report
           if: always()
@@ -70,7 +70,7 @@ jobs:
         - name: Run API Tests
           run: |
             mkdir -p reports/html
-            pytest -m api --html=reports/html/api-report.html --self-contained-html
+            pytest -m api --html=reports/api/api-report.html --self-contained-html
         
         - name: Upload API Report
           if: always()
@@ -113,7 +113,7 @@ jobs:
         - name: Run UI Tests
           run: |
             mkdir -p reports/html
-            pytest -m ui --html=reports/html/ui-report.html --self-contained-html
+            pytest -m ui --html=reports/ui/ui-report.html --self-contained-html
 
 
         - name: Upload UI Report
