@@ -29,15 +29,16 @@ def page(browser, request):
 
     # If test failed, save trace
     if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
-        os.makedirs("artifacts", exist_ok=True)
+        os.makedirs("reports/screenshots", exist_ok=True)
+        os.makedirs("reports/traces", exist_ok=True)
 
         page.screenshot(
-            path=f"artifacts/{request.node.name}.png",
+            path=f"reports/screenshots/{request.node.name}.png",
             full_page=True
         )
 
         context.tracing.stop(
-            path=f"artifacts/{request.node.name}-trace.zip"
+            path=f"reports/traces/{request.node.name}-trace.zip"
         )
     else:
         context.tracing.stop()
