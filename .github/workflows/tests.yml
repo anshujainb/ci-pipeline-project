@@ -12,52 +12,123 @@ on:
 
 jobs:
 
-  test:
+    unit-tests:
 
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
+      timeout-minutes: 20
 
-    steps:
+      steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.12"
+            cache: "pip"
+
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        
+        - name: Run UNIT Tests
+          run: |
+            mkdir -p reports/html
+            pytest -m unit --html=reports/html/unit-report.html --self-contained-html
+        
+        - name: Upload UNIT Report
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: unit-report
+            path: reports/unit/
+            retention-days: 1
+
+    api-tests:
+
+      runs-on: ubuntu-latest
+      timeout-minutes: 20
+
+      steps:
+
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.12"
+            cache: "pip"
+
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        
+        - name: Run API Tests
+          run: |
+            mkdir -p reports/html
+            pytest -m api --html=reports/html/api-report.html --self-contained-html
+        
+        - name: Upload API Report
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: api-report
+            path: reports/api/
+            retention-days: 1
+
+      
+    ui-tests:
+
+      runs-on: ubuntu-latest
+      timeout-minutes: 20
+
+      steps:
+
+        - name: Checkout code
+          uses: actions/checkout@v4
 
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: "3.12"
+            cache: "pip"
 
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
 
-      - name: Install Playwright browsers
-        run: |
-          playwright install --with-deps
+        - name: Install Playwright browsers
+          run: |
+            playwright install --with-deps
 
 
-      - name: Run tests
-        run: |
-          mkdir -p reports/html
-          pytest --html=reports/html/test-report.html --self-contained-html
+        - name: Run UI Tests
+          run: |
+            mkdir -p reports/html
+            pytest -m ui --html=reports/html/ui-report.html --self-contained-html
 
 
-      - name: Upload HTML Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: html-report
-          path: reports/html/
+        - name: Upload UI Report
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: ui-report
+            path: reports/ui/
+            retention-days: 1
 
-      - name: Upload Playwright Debug Files
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-debug
-          path: |
-            reports/screenshots/
-            reports/traces/
+        - name: Upload Playwright Debug Files
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: playwright-debug
+            path: |
+              reports/screenshots/
+              reports/traces/

@@ -6,6 +6,7 @@ from pages.login_page import LoginPage
 @pytest.mark.smoke
 class TestLogin:
 
+    
     def test_successful_login(self, page):
         login_page = LoginPage(page)
 
@@ -14,7 +15,6 @@ class TestLogin:
 
         assert "inventory" in page.url
     
-    @pytest.mark.ui
     @pytest.mark.regression
     def test_invalid_login(self, page):
         login_page = LoginPage(page)
