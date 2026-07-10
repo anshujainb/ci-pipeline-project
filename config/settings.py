@@ -8,7 +8,7 @@ USERNAME = os.getenv(
 
 PASSWORD = os.getenv(
     "TEST_PASSWORD",
-    "wrong_secret_sauce"
+    "secret_sauce"
 )
 
 BASE_URL = os.getenv(
