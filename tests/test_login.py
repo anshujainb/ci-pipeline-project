@@ -4,10 +4,9 @@ from config.settings import USERNAME, PASSWORD
 
 
 @pytest.mark.ui
-@pytest.mark.smoke
 class TestLogin:
-
-    
+    @pytest.mark.regression
+    @pytest.mark.smoke
     def test_successful_login(self, page):
         login_page = LoginPage(page)
 

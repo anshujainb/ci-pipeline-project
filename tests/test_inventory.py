@@ -9,6 +9,7 @@ from config.settings import USERNAME, PASSWORD
 @pytest.mark.regression
 class TestInventory:
 
+    @pytest.mark.smoke
     def test_verify_inventory_page_after_login(self, page):
 
         # Login
