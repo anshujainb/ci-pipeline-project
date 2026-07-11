@@ -7,6 +7,7 @@ from utils.schema_validator import validate_schema
 
 @pytest.mark.api
 @pytest.mark.regression
+@pytest.mark.smoke
 class TestUsersAPI:
 
     BASE_URL = "https://jsonplaceholder.typicode.com"
